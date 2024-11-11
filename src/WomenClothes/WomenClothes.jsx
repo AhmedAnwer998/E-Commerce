@@ -49,8 +49,10 @@ const WomenClothes = ({limit}) => {
 
   return (
     <Container>
-      <h1 data-aos="fade-up" data-aos-delay="100">Women's Clothing</h1>
-      <div className="grid grid-cols-4 gap-4 mx-auto  mb-4">
+      <h1 data-aos="fade-up" data-aos-delay="100">
+        Women's Clothing
+      </h1>
+      <div className="flex gap-4  mb-4">
         {displayedProducts.length > 0 ? (
           displayedProducts.map((product, index) => (
             <div

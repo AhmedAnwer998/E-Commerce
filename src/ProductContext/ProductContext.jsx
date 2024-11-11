@@ -6,6 +6,7 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [ cart, setCart ] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,6 +14,12 @@ export const ProductProvider = ({ children }) => {
         const response = await fetch("https://fakestoreapi.com/products");
         const data = await response.json();
         setProducts(data);
+
+        const uniqueCategories = [
+          "all", ...new Set(data.map((product) => product.category)),
+        ];
+        setCategories(uniqueCategories);
+
       } catch (error) {
         console.error(" Error fetching products : ", error);
       }
@@ -68,6 +75,7 @@ const decreaseQuantity = (productId) => {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        categories
       }}
     >
       {children}
