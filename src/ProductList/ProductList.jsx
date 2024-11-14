@@ -12,6 +12,8 @@ import MenClothing from "../MenClothing/MenClothing.jsx";
 import WomenClothes from "../WomenClothes/WomenClothes.jsx";
 import Jewelery from "../Jewelery/Jewelery.jsx";
 import Electronics from "../Electronics/Electronics.jsx";
+import Offers from "../Offers/Offers.jsx";
+import Footer from "../Footer/Footer.jsx";
 
 const ProductList = () => {
   const { products, setSelectedProduct, categories } =
@@ -148,7 +150,7 @@ const ProductList = () => {
                 <input
                   type="search"
                   placeholder="Search"
-                  className="me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border text-white px-2 pe-4 py-1 outline-none focus:outline-none placeholder:text-sm"
+                  className="me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border text-black px-2 pe-4 py-1 outline-none focus:outline-none placeholder:text-sm"
                   aria-label="Search"
                   value={searchProducts}
                   onChange={(e) => setSearchProducts(e.target.value)}
@@ -195,6 +197,9 @@ const ProductList = () => {
             ))
           ) : (
             <>
+            <Col xs={12}>
+            <Offers />
+            </Col>
               <Col xs={12} className="flex justify-center items-center mb-4">
                 <MenClothing />
               </Col>
@@ -207,6 +212,7 @@ const ProductList = () => {
               <Col xs={12} className="flex justify-center items-center mb-4">
                 <Electronics limit={4} />
               </Col>
+             
             </>
           )}
         </Row>

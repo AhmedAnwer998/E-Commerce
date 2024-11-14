@@ -11,6 +11,8 @@ import Electronics from "./Electronics/Electronics";
 import WomenClothes from "./WomenClothes/WomenClothes";
 import AOS from 'aos';
 import "aos/dist/aos.css";
+import Footer from "./Footer/Footer";
+import BeforeFooter from "./BeforeFooter/BeforeFooter";
 
 const App = () => {
 
@@ -41,6 +43,8 @@ const App = () => {
           <Route path="/WomenClothes" element={<WomenClothes />} />
         </Routes>
       </ProductProvider>
+      <BeforeFooter />
+      <Footer />
     </BrowserRouter>
   );
 };
