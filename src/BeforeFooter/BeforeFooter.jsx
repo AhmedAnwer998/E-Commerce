@@ -55,21 +55,40 @@ const BeforeFooter = () => {
 
 
   return (
-    <div className="">
+    <div className="text-center">
+        <div data-aos="fade-up" data-aos-delay="100">
+               <p className="text-md text-orange-300">What our customers are saying</p>
+      <h1 className='text-4xl font-bold'>Testimonials</h1>
+      <p className="text-sm">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit asperiores
+        modi Sit asperiores modi
+      </p>
+        </div>
+   
       <Slider {...settings}>
         {beforeFooter.map((beforeFooterr) => (
-          <Container  key={beforeFooterr.id} className="h-[300px] relative">
-            <h1></h1>
-            <Row  className=" gap-4">
-              <Col className='bg-gray-100 shadow-sm rounded-lg w-1/3 px-4 mx-2 flex flex-col'>
+          <Container
+            data-aos="zoom-in"
+            data-aos-delay="100"
+            key={beforeFooterr.id}
+            className="h-[300px] relative"
+          >
+            <Row className=" gap-4">
+              <Col className="bg-gray-100 shadow-md rounded-lg w-1/3 px-4 mx-2 flex flex-col">
                 <div>
-                  <img src={beforeFooterr.img} alt="gg" className='rounded-full' />
+                  <img
+                    src={beforeFooterr.img}
+                    alt="gg"
+                    className="rounded-full"
+                  />
                 </div>
                 <div>
-                  <p className='text-sm'>{beforeFooterr.text} </p>
-                  <h3 className='text-lg font-bold'>{beforeFooterr.name} </h3>
+                  <p className="text-sm">{beforeFooterr.text} </p>
+                  <h3 className="text-lg font-bold">{beforeFooterr.name} </h3>
                 </div>
-                <p className='absolute -top-8 right-3 font-serif text-9xl text-gray-600'>,,</p>
+                <p className="absolute -top-8 right-3 font-serif text-9xl text-gray-600">
+                  ,,
+                </p>
               </Col>
             </Row>
           </Container>
