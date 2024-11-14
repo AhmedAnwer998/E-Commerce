@@ -74,7 +74,7 @@ const BeforeFooter = () => {
             className="h-[300px] relative"
           >
             <Row className=" gap-4">
-              <Col className="bg-gray-100 shadow-md rounded-lg w-1/3 px-4 mx-2 flex flex-col">
+              <Col className="bg-gray-100 shadow-md rounded-lg w-1/3 px-4 mx-2 flex flex-col py-2 text-start">
                 <div>
                   <img
                     src={beforeFooterr.img}
