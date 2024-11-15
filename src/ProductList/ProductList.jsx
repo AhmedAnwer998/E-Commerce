@@ -13,7 +13,7 @@ import WomenClothes from "../WomenClothes/WomenClothes.jsx";
 import Jewelery from "../Jewelery/Jewelery.jsx";
 import Electronics from "../Electronics/Electronics.jsx";
 import Offers from "../Offers/Offers.jsx";
-import Footer from "../Footer/Footer.jsx";
+import SideBarCategory from "../SideBarCategory/SideBarCategory.jsx";
 
 const ProductList = () => {
   const { products, setSelectedProduct, categories } =
@@ -74,6 +74,7 @@ const ProductList = () => {
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
+                <SideBarCategory />
                 <Link
                   className="!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000"
                   to="/MenClothing"
@@ -197,9 +198,9 @@ const ProductList = () => {
             ))
           ) : (
             <>
-            <Col xs={12}>
-            <Offers />
-            </Col>
+              <Col xs={12}>
+                <Offers />
+              </Col>
               <Col xs={12} className="flex justify-center items-center mb-4">
                 <MenClothing />
               </Col>
@@ -212,7 +213,6 @@ const ProductList = () => {
               <Col xs={12} className="flex justify-center items-center mb-4">
                 <Electronics limit={4} />
               </Col>
-             
             </>
           )}
         </Row>
