@@ -14,10 +14,12 @@ import Jewelery from "../Jewelery/Jewelery.jsx";
 import Electronics from "../Electronics/Electronics.jsx";
 import Offers from "../Offers/Offers.jsx";
 import SideBarCategory from "../SideBarCategory/SideBarCategory.jsx";
+import { useTheme } from "../ThemeContext/ThemeContext"; // Import useTheme
 
 const ProductList = () => {
   const { products, setSelectedProduct, categories } =
     useContext(ProductContext);
+  const { isDarkMode } = useTheme(); // Access dark mode state
   const [searchProducts, setSearchProducts] = useState("");
   const [keyWord, setKeyWord] = useState({ id: 0, category: "all" });
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -63,9 +65,14 @@ const ProductList = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="">
-      <div className="">
-        <Navbar expand="lg" className="bg-amber-500 shadow-md">
+    <div className={isDarkMode ? "bg-dark text-white" : ""}>
+      <div>
+        <Navbar
+          expand="lg"
+          className={`shadow-md ${
+            isDarkMode ? "bg-dark text-white" : "bg-amber-500"
+          }`}
+        >
           <Container fluid className="px-2">
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -76,37 +83,54 @@ const ProductList = () => {
               >
                 <SideBarCategory />
                 <Link
-                  className="!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000"
+                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                    isDarkMode ? "!text-white" : "!text-black"
+                  }`}
                   to="/MenClothing"
                 >
                   Men's Clothes
                 </Link>
                 <Link
-                  className="!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000"
+                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                    isDarkMode ? "!text-white" : "!text-black"
+                  }`}
+                  to="/WomenClothes"
+                >
+                  Women's Clothes
+                </Link>
+                <Link
+                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                    isDarkMode ? "!text-white" : "!text-black"
+                  }`}
                   to="/Jewelery"
                 >
                   Jewelery
                 </Link>
                 <Link
-                  className="!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000"
+                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                    isDarkMode ? "!text-white" : "!text-black"
+                  }`}
                   to="/Electronics"
                 >
                   Electronics
                 </Link>
-                <Link
-                  className="!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000"
-                  to="/WomenClothes"
-                >
-                  Women's Clothes
-                </Link>
+
                 <div className="group relative cursor-pointer flex items-center">
-                  <span className="flex items-center cursor-pointer gap-[2px] !text-black hover:!text-white no-underline hover:scale-95 transition duration-1000">
+                  <span
+                    className={`flex items-center cursor-pointer gap-[2px] !text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                      isDarkMode ? "!text-white" : "!text-black"
+                    }`}
+                  >
                     Trending Products{" "}
                     <span className="transition-transform duration-200 transform group-hover:rotate-180 ">
                       <IoMdArrowDropdown />
                     </span>
                   </span>
-                  <ul className="absolute z-[100] hidden group-hover:block shadow-lg rounded-lg p-2 top-full left-0 bg-white w-48">
+                  <ul
+                    className={`absolute z-[100] hidden group-hover:block shadow-lg rounded-lg p-2 top-full left-0 w-48 ${
+                      isDarkMode ? "bg-dark text-white" : "bg-white text-black"
+                    }`}
+                  >
                     <li className="block px-4 py-2 hover:bg-gray-100 rounded-lg">
                       Products
                     </li>
@@ -129,13 +153,21 @@ const ProductList = () => {
                 </div>
                 <div
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="group relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center bg-white border"
+                  className={`group relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center border ${
+                    isDarkMode ? "bg-dark text-white" : "bg-white text-black"
+                  }`}
                   style={{ width: selectedCategoryWidth }}
                 >
                   {selectedCategory}
                   <IoMdArrowDropdown className="ml-1" />
                   {isDropdownOpen && (
-                    <ul className="absolute z-[100] hidden group-hover:block top-full left-0 bg-white shadow-lg rounded-lg w-48 px-2 py-2">
+                    <ul
+                      className={`absolute z-[100] top-full left-0 shadow-lg rounded-lg w-48 px-2 py-2 ${
+                        isDarkMode
+                          ? "bg-dark text-white"
+                          : "bg-white text-black"
+                      }`}
+                    >
                       {categories.map((category, index) => (
                         <li
                           key={index}
@@ -151,7 +183,9 @@ const ProductList = () => {
                 <input
                   type="search"
                   placeholder="Search"
-                  className="me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border text-black px-2 pe-4 py-1 outline-none focus:outline-none placeholder:text-sm"
+                  className={`me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border px-2 pe-4 py-1 outline-none placeholder:text-sm ${
+                    isDarkMode ? "text-white bg-dark" : "text-black"
+                  }`}
                   aria-label="Search"
                   value={searchProducts}
                   onChange={(e) => setSearchProducts(e.target.value)}
@@ -181,7 +215,9 @@ const ProductList = () => {
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className="no-underline text-black shadow-md rounded-md"
+                  className={`no-underline shadow-md rounded-md ${
+                    isDarkMode ? "text-white bg-dark" : "text-black"
+                  }`}
                 >
                   <div className="h-64 flex items-center justify-center ">
                     <img

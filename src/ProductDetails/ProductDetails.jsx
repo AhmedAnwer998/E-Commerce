@@ -61,7 +61,7 @@ const ProductDetails = () => {
             </span>
           </div>
           <button
-            className="px-2 py-2 rounded-full bg-amber-400 hover:bg-amber-500 active:bg-amber-200 transition-all duration-300"
+            className="px-2 py-2 rounded-full bg-amber-400 hover:bg-amber-500 active:bg-amber-200 active:scale-95 transition-all duration-300"
             onClick={handleAddToCart}
           >
             Add To Cart

@@ -3,11 +3,11 @@ import { ProductContext } from "../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-
+import { useTheme } from "../ThemeContext/ThemeContext"; // Import the useTheme hook
 
 const Jewelery = () => {
-  const { products, setSelectedProduct, addToCart } =
-    useContext(ProductContext);
+  const { products, setSelectedProduct, addToCart } = useContext(ProductContext);
+  const { isDarkMode } = useTheme(); // Get the dark mode state
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -20,7 +20,6 @@ const Jewelery = () => {
   const jeweleryCategory = products.filter(
     (product) => product.category === "jewelery"
   );
-
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -47,24 +46,34 @@ const Jewelery = () => {
   };
 
   return (
-    <Container className="overflow-hidden">
-      <h1 data-aos="zoom-out-left" data-aos-delay="200">
+    <Container
+      className={`overflow-hidden ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
+      <h1
+        data-aos="zoom-out-left"
+        data-aos-delay="200"
+        className={`${isDarkMode ? "text-white" : "text-black"}`}
+      >
         Jewelery
       </h1>
-      <div className="flex gap-4  mb-4">
+      <div className="flex gap-4 mb-4">
         {jeweleryCategory.length > 0 ? (
           jeweleryCategory.map((product, index) => (
             <div
               data-aos="zoom-out"
               data-aos-delay="400"
               key={product.id}
-              className="w-80 min-h-96 shadow-md rounded-md flex flex-col items-center p-4"
+              className={`w-80 min-h-96 shadow-md rounded-md flex flex-col items-center p-4 ${
+                isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+              }`}
             >
               <div className="h-64 w-full flex items-center justify-center">
                 <img
                   src={product.image}
                   alt="product-img"
-                  className="h-full object-contain "
+                  className="h-full object-contain"
                 />
               </div>
               <div className="w-full flex flex-col items-center text-center mt-4">
@@ -82,13 +91,13 @@ const Jewelery = () => {
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 transition-all duration-300"
+                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
                 >
                   More Details
                 </Link>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className=" mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-all duration-300 "
+                  className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
                 >
                   Add To Cart
                 </button>

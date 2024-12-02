@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../ProductContext/ProductContext";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
@@ -30,11 +31,10 @@ const Cart = () => {
 
   return (
     <Container>
-      <h1>Cart</h1>
       {cart.length === 0 ? (
-        <p>ur cart is empty</p>
+        <h3 className="flex justify-center items-center text-center min-h-40 font-bold">Your Easy Shopping Cart is empty</h3>
       ) : (
-        <Row className="flex ">
+        <Row className="flex my-4">
           {cart.map((product, index) => (
             <React.Fragment key={product.id}>
               <Row>
@@ -99,9 +99,9 @@ const Cart = () => {
                   >
                     <h2>Items: {calculateTotalQuantities()}</h2>
                     <h2>Subtotal: ${calculateSubTotal()}</h2>
-                    <button className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-all duration-300">
+                    <Link to={`/CheckOut`} className="mt-2 px-4 py-2 bg-amber-500 text-white no-underline rounded-full hover:bg-amber-600 transition-all duration-300">
                       Proceed To Buy
-                    </button>
+                    </Link>
                   </Col>
                 )}
               </Row>

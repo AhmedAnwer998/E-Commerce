@@ -3,10 +3,11 @@ import { ProductContext } from "../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Container } from "react-bootstrap";
+import { useTheme } from "../ThemeContext/ThemeContext"; // Import the useTheme hook
 
-const WomenClothes = ({limit}) => {
-  const { products, setSelectedProduct, addToCart } =
-    useContext(ProductContext);
+const WomenClothes = ({ limit }) => {
+  const { products, setSelectedProduct, addToCart } = useContext(ProductContext);
+  const { isDarkMode } = useTheme(); // Get dark mode state
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -19,9 +20,7 @@ const WomenClothes = ({limit}) => {
   const WomenClothing = products.filter(
     (product) => product.category === "women's clothing"
   );
-    const displayedProducts = limit
-      ? WomenClothing.slice(0, limit)
-      : WomenClothing;
+  const displayedProducts = limit ? WomenClothing.slice(0, limit) : WomenClothing;
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -48,8 +47,14 @@ const WomenClothes = ({limit}) => {
   };
 
   return (
-    <Container>
-      <h1 data-aos="fade-up" data-aos-delay="100">Women's Clothing</h1>
+    <Container
+      className={`${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
+      <h1 data-aos="fade-up" data-aos-delay="100">
+        Women's Clothing
+      </h1>
       <div className="grid grid-cols-4 gap-4 mx-auto  mb-4">
         {displayedProducts.length > 0 ? (
           displayedProducts.map((product, index) => (
@@ -58,8 +63,10 @@ const WomenClothes = ({limit}) => {
               data-aos-delay="300"
               key={product.id}
               className={`w-80 shadow-md rounded-md min-h-96 flex flex-col items-center p-4 ${
-                index >= 4 ? "col-span-2 justify-self-center" : ""
-              }`}
+                isDarkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-white text-black"
+              } ${index >= 4 ? "col-span-2 justify-self-center" : ""}`}
             >
               <div className="h-64 w-full flex items-center justify-center">
                 <img
@@ -83,13 +90,13 @@ const WomenClothes = ({limit}) => {
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 transition-all duration-300"
+                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
                 >
                   More Details
                 </Link>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-all duration-300"
+                  className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
                 >
                   Add to Cart
                 </button>

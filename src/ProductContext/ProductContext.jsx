@@ -1,12 +1,27 @@
 import { createContext, useState, useEffect } from "react";
+import { message } from "antd";
+
 
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [ cart, setCart ] = useState([]);
+  const [cart, setCart] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  // Ant Design Message
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = (productName) => {
+    messageApi.open({
+      type: "success",
+      content:`Added to your cart!`,
+    });
+  };
+
+  // Fetch products
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,10 +31,10 @@ export const ProductProvider = ({ children }) => {
         setProducts(data);
 
         const uniqueCategories = [
-          "all", ...new Set(data.map((product) => product.category)),
+          "all",
+          ...new Set(data.map((product) => product.category)),
         ];
         setCategories(uniqueCategories);
-
       } catch (error) {
         console.error(" Error fetching products : ", error);
       }
@@ -28,56 +43,70 @@ export const ProductProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
-  const addToCart = (product)=>{
-const existingProduct = cart.find((item) => item.id === product.id);
+  const addToCart = (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    success(product.title);
 
-if(existingProduct){
-  setCart(
-    cart.map((item)=>
-    item.id === product.id ?{...item, quantity: item.quantity + 1}: item
-    )
-  );
-} else {
-  setCart([...cart, {...product, quantity: 1}]);
-}
+    if (existingProduct) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
   };
-const removeFromCart = (productId)=>{
-  setCart(cart.filter((product) => product.id !== productId));
-}
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((product) => product.id !== productId));
+  };
 
-const increaseQuantity = (productId) => {
-  setCart(
-    cart.map((item) => item.id === productId ? {...item, quantity: item.quantity + 1} : item
-  )
-  );
-};
-
-const decreaseQuantity = (productId) => {
-  const product = cart.find((item) => item.id === productId);
-  if(product.quantity > 1){
+  const increaseQuantity = (productId) => {
     setCart(
-      cart.map((item) => item.id === productId ? {...item, quantity: item.quantity - 1} : item
-    )
+      cart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
     );
-  } else {
-    removeFromCart(productId);
-  }
-};
+  };
+
+  const decreaseQuantity = (productId) => {
+    const product = cart.find((item) => item.id === productId);
+    if (product.quantity > 1) {
+      setCart(
+        cart.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+      );
+    } else {
+      removeFromCart(productId);
+    }
+  };
+
+  const calculateTotalQuantities = () => {
+    return cart.reduce((acc, product) => acc + product.quantity, 0);
+  };
 
   return (
     <ProductContext.Provider
       value={{
+        contextHolder,
         products,
         selectedProduct,
         setSelectedProduct,
+        calculateTotalQuantities,
         cart,
         addToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
-        categories
+        categories,
       }}
     >
+      {contextHolder}
       {children}
     </ProductContext.Provider>
   );

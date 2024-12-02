@@ -3,12 +3,12 @@ import { ProductContext } from "../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Container } from "react-bootstrap";
-
+import { useTheme } from "../ThemeContext/ThemeContext";
 
 const MenClothing = () => {
   const { products, addToCart, setSelectedProduct } =
     useContext(ProductContext);
-
+  const { isDarkMode } = useTheme();
 
   const handleSelectedProduct = (product) => {
     setSelectedProduct(product);
@@ -47,7 +47,11 @@ const MenClothing = () => {
   };
 
   return (
-    <Container className="">
+    <Container
+      className={`${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      } p-4 rounded-md`}
+    >
       <h1 className="" data-aos="fade-up" data-aos-delay="100">
         Men's Clothing
       </h1>
@@ -58,7 +62,11 @@ const MenClothing = () => {
               data-aos="fade-up"
               data-aos-delay={index * 300}
               key={product.id}
-              className="space-y-3 w-80 min-h-96 shadow-md rounded-md flex flex-col items-center p-4"
+              className={`space-y-3 w-80 min-h-96 shadow-md rounded-md flex flex-col items-center p-4 ${
+                isDarkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-white text-black shadow-lg"
+              }`}
             >
               <div className="h-64 w-full flex items-center justify-center">
                 <img
@@ -82,13 +90,13 @@ const MenClothing = () => {
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 transition-all duration-300"
+                  className={`text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300`}
                 >
                   More Details
                 </Link>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className=" mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-all duration-300 "
+                  className=" mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300 "
                 >
                   Add To Cart
                 </button>
