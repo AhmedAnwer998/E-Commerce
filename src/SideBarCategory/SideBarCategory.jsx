@@ -8,9 +8,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { HiBars3 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { useTheme } from "../ThemeContext/ThemeContext";
 
 const SideBarCategory = () => {
   const [open, setOpen] = useState(false);
+  const {isDarkMode} = useTheme();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -60,7 +62,7 @@ const SideBarCategory = () => {
     <div>
       <button className="flex align-middle" onClick={toggleDrawer(true)}>
         {" "}
-        <HiBars3 className="text-2xl !text-black font-bold cursor-pointer hover:!text-white hover:scale-95 duration-1000 transition-all " />
+        <HiBars3 className={`text-2xl ${isDarkMode ? "text-white" : "text-black"} !text-black font-bold cursor-pointer hover:!text-white hover:scale-95 duration-1000 transition-all`} />
       </button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {<DrawerList />}

@@ -72,13 +72,13 @@ const BeforeFooter = () => {
             data-aos-delay="100"
             key={beforeFooterr.id}
             className={`h-[300px] relative ${
-              isDarkMode ? "bg-gray-800" : "bg-gray-100"
+              isDarkMode ? "bg-dark" : ""
             }`}
           >
             <Row className="gap-4">
               <Col
                 className={`shadow-md rounded-lg w-1/3 px-4 mx-2 flex flex-col py-2 text-start ${
-                  isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100"
+                  isDarkMode ? "bg-gray-800 text-white" : ""
                 }`}
               >
                 <div>

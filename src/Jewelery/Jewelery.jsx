@@ -48,7 +48,7 @@ const Jewelery = () => {
   return (
     <Container
       className={`overflow-hidden ${
-        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+        isDarkMode ? "bg-dark text-white" : "bg-white text-black"
       }`}
     >
       <h1
@@ -58,16 +58,16 @@ const Jewelery = () => {
       >
         Jewelery
       </h1>
-      <div className="flex gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto mb-4">
         {jeweleryCategory.length > 0 ? (
           jeweleryCategory.map((product, index) => (
             <div
               data-aos="zoom-out"
               data-aos-delay="400"
               key={product.id}
-              className={`w-80 min-h-96 shadow-md rounded-md flex flex-col items-center p-4 ${
+              className={`shadow-md rounded-md flex flex-col items-center p-4 ${
                 isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-              }`}
+              } ${index < 4 ? "lg:col-span-1" : "lg:col-span-2"}`}
             >
               <div className="h-64 w-full flex items-center justify-center">
                 <img

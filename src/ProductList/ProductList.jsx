@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./ProductList.css";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import { ProductContext } from "../ProductContext/ProductContext.jsx";
@@ -65,85 +63,88 @@ const ProductList = () => {
   }, [selectedCategory]);
 
   return (
-    <div className={isDarkMode ? "bg-dark text-white" : ""}>
-      <div>
-        <Navbar
-          expand="lg"
-          className={`shadow-md ${
-            isDarkMode ? "bg-dark text-white" : "bg-amber-500"
-          }`}
-        >
-          <Container fluid className="px-2">
-            <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-              <Nav
-                className="gap-3 me-auto flex items-center"
-                style={{ maxHeight: "100px" }}
-                navbarScroll
+    <div className={isDarkMode ? "bg-dark text-white " : ""}>
+      <div
+        className={`shadow-md z-20 ${
+          isDarkMode ? "bg-slate-800 brightness-90 text-white " : "bg-amber-500"
+        }`}
+      >
+        <Container fluid className="py-2">
+          <div className=" flex justify-between">
+            <div
+              className="remove-992 gap-3 me-auto flex items-center"
+              style={{ maxHeight: "100px" }}
+            >
+              <SideBarCategory />
+              <Link
+                className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                  isDarkMode ? "!text-white" : "!text-black"
+                }`}
+                to="/MenClothing"
               >
-                <SideBarCategory />
-                <Link
-                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
-                    isDarkMode ? "!text-white" : "!text-black"
-                  }`}
-                  to="/MenClothing"
-                >
-                  Men's Clothes
-                </Link>
-                <Link
-                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
-                    isDarkMode ? "!text-white" : "!text-black"
-                  }`}
-                  to="/WomenClothes"
-                >
-                  Women's Clothes
-                </Link>
-                <Link
-                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
-                    isDarkMode ? "!text-white" : "!text-black"
-                  }`}
-                  to="/Jewelery"
-                >
-                  Jewelery
-                </Link>
-                <Link
-                  className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
-                    isDarkMode ? "!text-white" : "!text-black"
-                  }`}
-                  to="/Electronics"
-                >
-                  Electronics
-                </Link>
+                Men's Clothes
+              </Link>
+              <Link
+                className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                  isDarkMode ? "!text-white" : "!text-black"
+                }`}
+                to="/WomenClothes"
+              >
+                Women's Clothes
+              </Link>
+              <Link
+                className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                  isDarkMode ? "!text-white" : "!text-black"
+                }`}
+                to="/Jewelery"
+              >
+                Jewelery
+              </Link>
+              <Link
+                className={`!text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                  isDarkMode ? "!text-white" : "!text-black"
+                }`}
+                to="/Electronics"
+              >
+                Electronics
+              </Link>
 
-                <div className="group relative cursor-pointer flex items-center">
-                  <span
-                    className={`flex items-center cursor-pointer gap-[2px] !text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
-                      isDarkMode ? "!text-white" : "!text-black"
-                    }`}
-                  >
-                    Trending Products{" "}
-                    <span className="transition-transform duration-200 transform group-hover:rotate-180 ">
-                      <IoMdArrowDropdown />
-                    </span>
+              <div className="group relative cursor-pointer flex items-center">
+                <span
+                  className={`flex items-center cursor-pointer gap-[2px] !text-black hover:!text-white no-underline hover:scale-95 transition duration-1000 ${
+                    isDarkMode ? "!text-white" : "!text-black"
+                  }`}
+                >
+                  Trending Products{" "}
+                  <span className="transition-transform duration-200 transform group-hover:rotate-180 ">
+                    <IoMdArrowDropdown />
                   </span>
-                  <ul
-                    className={`absolute z-[100] hidden group-hover:block shadow-lg rounded-lg p-2 top-full left-0 w-48 ${
-                      isDarkMode ? "bg-dark text-white" : "bg-white text-black"
-                    }`}
+                </span>
+                <ul
+                  className={`absolute z-[100] hidden group-hover:block shadow-lg rounded-lg p-2 top-full left-0 w-48 ${
+                    isDarkMode ? "bg-dark text-white" : "bg-white text-black"
+                  }`}
+                >
+                  <li
+                    className={`block px-4 py-2 hover:bg-gray-100 rounded-lg ${isDarkMode ? "hover:bg-gray-600" : ""}`}
                   >
-                    <li className="block px-4 py-2 hover:bg-gray-100 rounded-lg">
-                      Products
-                    </li>
-                    <li className="block px-4 py-2 hover:bg-gray-100 rounded-lg">
-                      Best Selling
-                    </li>
-                    <li className="block px-4 py-2 hover:bg-gray-100 rounded-lg">
-                      Top Rated
-                    </li>
-                  </ul>
-                </div>
-              </Nav>
-              <Form onSubmit={handleSearch} className="flex group relative">
+                    Products
+                  </li>
+                  <li
+                    className={`block px-4 py-2 hover:bg-gray-100 rounded-lg ${isDarkMode ? "hover:bg-gray-600" : ""}`}
+                  >
+                    Best Selling
+                  </li>
+                  <li
+                    className={`block px-4 py-2 hover:bg-gray-100 rounded-lg ${isDarkMode ? "hover:bg-gray-600" : ""}`}
+                  >
+                    Top Rated
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="bigg-div">
+              <form onSubmit={handleSearch} className="flex big-big-div">
                 <div
                   id="category-width"
                   className="px-4 cursor-pointer text-sm pointer-events-none invisible flex items-center justify-center"
@@ -153,7 +154,7 @@ const ProductList = () => {
                 </div>
                 <div
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className={`group relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center border ${
+                  className={ `relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center border ${
                     isDarkMode ? "bg-dark text-white" : "bg-white text-black"
                   }`}
                   style={{ width: selectedCategoryWidth }}
@@ -162,7 +163,7 @@ const ProductList = () => {
                   <IoMdArrowDropdown className="ml-1" />
                   {isDropdownOpen && (
                     <ul
-                      className={`absolute z-[100] top-full left-0 shadow-lg rounded-lg w-48 px-2 py-2 ${
+                      className={`absolute z-50 top-full left-0 shadow-lg rounded-lg w-48 px-2 py-2 ${
                         isDarkMode
                           ? "bg-dark text-white"
                           : "bg-white text-black"
@@ -171,7 +172,7 @@ const ProductList = () => {
                       {categories.map((category, index) => (
                         <li
                           key={index}
-                          className="block px-2 py-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+                          className={`block px-2 py-2 z-50  rounded-lg cursor-pointer ${isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
                           onClick={() => handleChangeCategory(category)}
                         >
                           {category}
@@ -180,26 +181,28 @@ const ProductList = () => {
                     </ul>
                   )}
                 </div>
-                <input
-                  type="search"
-                  placeholder="Search"
-                  className={`me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border px-2 pe-4 py-1 outline-none placeholder:text-sm ${
-                    isDarkMode ? "text-white bg-dark" : "text-black"
-                  }`}
-                  aria-label="Search"
-                  value={searchProducts}
-                  onChange={(e) => setSearchProducts(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="absolute top-1/2 -translate-y-1/2 right-4 text-lg font-extrabold hover:text-amber-600"
-                >
-                  <IoIosSearch />
-                </button>
-              </Form>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+                <div className="big-div flex relative">
+                  <input
+                    type="search"
+                    placeholder="Search"
+                    className={`fill-the-screen me-2 w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border px-2 pe-4 py-1 outline-none placeholder:text-sm ${
+                      isDarkMode ? "text-white bg-dark" : "text-black"
+                    }`}
+                    aria-label="Search"
+                    value={searchProducts}
+                    onChange={(e) => setSearchProducts(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="absolute top-1/2 -translate-y-1/2 right-4 text-lg font-extrabold hover:text-amber-600"
+                  >
+                    <IoIosSearch />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Container>
       </div>
       <Container className="mt-4 px-3 py-2 w-screen flex justify-center items-center">
         <Row className="w-full flex flex-row justify-center items-center ">
@@ -256,5 +259,5 @@ const ProductList = () => {
     </div>
   );
 };
-
+                
 export default ProductList;

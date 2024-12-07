@@ -14,10 +14,18 @@ export const ProductProvider = ({ children }) => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const success = (productName) => {
+  const success = () => {
+
+    
+
     messageApi.open({
       type: "success",
-      content:`Added to your cart!`,
+      content: `Added to your cart!`,
+      style: {
+        right: "20px", // Push the message to the right
+        position: "relative", // Keep natural stacking, adjust visual position
+        textAlign: "right", // Ensure text is right-aligned
+      },
     });
   };
 

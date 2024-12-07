@@ -47,67 +47,59 @@ const WomenClothes = ({ limit }) => {
   };
 
   return (
-    <Container
-      className={`${
-        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-      }`}
+    <div
+      className={`${isDarkMode ? "bg-dark text-white" : "bg-white text-black"}`}
     >
-      <h1 data-aos="fade-up" data-aos-delay="100">
-        Women's Clothing
-      </h1>
-      <div className="grid grid-cols-4 gap-4 mx-auto  mb-4">
-        {displayedProducts.length > 0 ? (
-          displayedProducts.map((product, index) => (
+      <Container
+        className={`${
+          isDarkMode ? "bg-dark text-white" : "bg-white text-black"
+        } overflow-hidden`}
+      >
+        <h1 data-aos="fade-up" data-aos-delay="100" className="">
+          Women's Clothing
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto mb-4">
+          {displayedProducts.map((product, index) => (
             <div
-              data-aos="zoom-in"
-              data-aos-delay="300"
               key={product.id}
-              className={`w-80 shadow-md rounded-md min-h-96 flex flex-col items-center p-4 ${
-                isDarkMode
-                  ? "bg-gray-800 text-white"
-                  : "bg-white text-black"
-              } ${index >= 4 ? "col-span-2 justify-self-center" : ""}`}
+              data-aos="zoom-in"
+              className={`shadow-md rounded-md flex flex-col items-center p-4 ${
+                isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+              } ${index < 4 ? "lg:col-span-1" : "lg:col-span-2"}`}
             >
               <div className="h-64 w-full flex items-center justify-center">
                 <img
                   src={product.image}
                   alt="product-img"
-                  className="h-full object-contain"
+                  className="h-full w-auto object-contain"
                 />
               </div>
-
               <div className="w-full flex flex-col items-center text-center mt-4">
-                <p className="font-semibold h-12 flex items-center justify-center text-center">
-                  {product.title}{" "}
+                <p className="font-semibold text-sm md:text-lg line-clamp-2">
+                  {product.title}
                 </p>
-                <span className="font-bold">Price: ${product.price} </span>
-                <div className="mt-1 flex items-center">
-                  {renderStars(product.rating.rate)}
-                  <span className="ml-2 text-sm text-gray-600">
-                    ({product.rating.rate})
-                  </span>
-                </div>
+                <span className="font-bold text-sm md:text-lg">
+                  Price: ${product.price}
+                </span>
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-4 py-2 hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
+                  className="text-white bg-amber-400 mt-2 block no-underline rounded-full px-3 py-2 hover:bg-amber-600 active:scale-95 transition-all"
                 >
                   More Details
                 </Link>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 active:bg-amber-200 active:scale-95 transition-all duration-300"
+                  className="mt-2 px-3 py-2 bg-amber-500 text-white rounded-full hover:bg-amber-600 active:scale-95 transition-all"
                 >
                   Add to Cart
                 </button>
               </div>
             </div>
-          ))
-        ) : (
-          <p>No products found</p>
-        )}
-      </div>
-    </Container>
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 };
 

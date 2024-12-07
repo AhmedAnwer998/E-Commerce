@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { ProductContext } from "../ProductContext/ProductContext";
 import { Container, Row, Col } from "react-bootstrap";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useTheme } from "../ThemeContext/ThemeContext";
 
 const ProductDetails = () => {
   const { selectedProduct, addToCart } = useContext(ProductContext);
+  const {isDarkMode} = useTheme();
 
   const handleAddToCart = () => {
     if (selectedProduct) {
@@ -39,8 +41,9 @@ const ProductDetails = () => {
   };
 
   return (
-    <Container>
-      <Row className="mt-4">
+    <div className={`${isDarkMode ? "bg-dark text-white" : ""}`}>
+<Container>
+      <Row className="p-4">
         <Col xl={4}>
           <img
             src={selectedProduct.image}
@@ -69,6 +72,8 @@ const ProductDetails = () => {
         </Col>
       </Row>
     </Container>
+    </div>
+    
   );
 };
 

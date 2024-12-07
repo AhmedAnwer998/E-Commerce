@@ -1,4 +1,5 @@
 import React from "react";
+import "./Offers.css";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Slider from "react-slick";
@@ -7,6 +8,9 @@ import "slick-carousel/slick/slick-theme.css";
 import sale from "/images/sale.png";
 import shopping from "/images/shopping.png";
 import women from "/images/women.png";
+import { useTheme } from "../ThemeContext/ThemeContext";
+
+
 
 const myOffers = [
   {
@@ -48,26 +52,33 @@ const Offers = () => {
     cssEase: "ease-in-out",
   };
 
+
+
+  const { isDarkMode } = useTheme();
+
+
+
+
   return (
-    <div className="slider-container relative min-h-[550px]">
-      <div className="w-[650px] h-[600px] absolute bg-yellow-500 rotate-45 -z-10 -top-1/2 right-0 rounded-3xl"></div>
+    <div className={`slider-container relative z-1 min-h-[550px ${isDarkMode ? "bg-dark text-white" : ""}`}>
+      {/* <div className={`w-[650px] h-[600px] absolute  rotate-45 -z-10 -top-1/2 right-0 rounded-3xl ${isDarkMode ? "bg-yellow-700 brightness-90" : "bg-yellow-500"}`}></div> */}
 
       <Slider className="" {...settings}>
         {myOffers.map((offer) => (
-          <Container className=" w-full h-[600px] flex items-center justify-center">
+          <Container className=" w-full h-[600px] flex items-center justify-center ">
             <Row
               key={offer.id}
-              className=" w-full h-full flex items-center justify-center"
+              className="custom-row w-full h-full flex items-center justify-center"
             >
               <Col className="">
-                <h1 className="text-7xl font-bold">{offer.title}</h1>
-                <p className="text-sm">{offer.description}</p>
+                <h1 className="offer-title text-7xl font-bold">{offer.title}</h1>
+                <p className="offer-desc text-sm">{offer.description}</p>
               </Col>
               <Col className="h-[400px] w-[400px] flex items-center justify-center">
                 <img
                   src={offer.image}
                   alt={offer.title}
-                  className="h-full object-contain"
+                  className="offer-image h-full object-contain"
                 />
               </Col>
             </Row>

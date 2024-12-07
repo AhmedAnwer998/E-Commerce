@@ -61,7 +61,7 @@ const SignIn = () => {
   return (
     <div
       className={`flex justify-center items-center h-screen ${
-        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+        isDarkMode ? "bg-dark text-white" : "bg-white text-black"
       }`}
     >
       <form
@@ -101,7 +101,7 @@ const SignIn = () => {
         </div>
         <div className="my-2 flex items-center justify-center">
           <hr className="flex-grow border-gray-600" />
-          <span className="mx-2 text-[17px] text-gray-900">or</span>
+          <span className="mx-2 text-[17px] text-gray-400">or</span>
           <hr className="flex-grow border-gray-600" />
         </div>
         <div className="relative mb-3">

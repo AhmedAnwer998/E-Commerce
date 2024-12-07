@@ -12,33 +12,23 @@ import {
 } from "firebase/auth";
 import { auth } from "../Firebase/Firebase";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../ThemeContext/ThemeContext";
 
 const SignUp = () => {
   const [user_name, setUser_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_password] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  const {isDarkMode} = useTheme();
+
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
 
-  useEffect(() => {
-    // Check if dark mode is stored in localStorage and set the state accordingly
-    const darkMode = localStorage.getItem("darkMode");
-    if (darkMode) {
-      setIsDarkMode(darkMode === "true");
-    }
-  }, []);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => {
-      const newMode = !prev;
-      localStorage.setItem("darkMode", newMode);
-      return newMode;
-    });
-  };
+
 
   const handleThirdPartySignIn = async (provider) => {
     try {
@@ -69,7 +59,7 @@ const SignUp = () => {
 
   return (
     <div
-      className={`flex justify-center items-center min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-white"}`}
+      className={`flex justify-center items-center min-h-screen ${isDarkMode ? "bg-dark" : "bg-white"}`}
     >
       <form
         onSubmit={signUp}
@@ -113,11 +103,7 @@ const SignUp = () => {
         {/* Divider with "or" */}
         <div className="my-2 flex items-center justify-center">
           <hr className="flex-grow border-gray-600" />
-          <span
-            className={`mx-2 text-[17px] ${isDarkMode ? "text-white" : "text-gray-900"}`}
-          >
-            or
-          </span>
+          <span className=" mx-2 text-[17px] text-gray-400"> or </span>
           <hr className="flex-grow border-gray-600" />
         </div>
 
@@ -212,17 +198,9 @@ const SignUp = () => {
         </div>
         <button
           type="submit"
-          className={`my-4 text-sm border border-sky-500 py-1 rounded-md hover:bg-gray-600 ${isDarkMode ? "text-white" : "text-sky-700"}`}
+          className={`my-4 text-sm border border-sky-500 py-1 text-sky-700 rounded-md hover:bg-blue-50 `}
         >
           Create Account
-        </button>
-        {/* Dark Mode Toggle */}
-        <button
-          type="button"
-          onClick={toggleDarkMode}
-          className={`mt-4 py-1 px-3 border rounded-md ${isDarkMode ? "bg-white text-gray-700" : "bg-gray-200 text-gray-800"}`}
-        >
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
         </button>
       </form>
     </div>

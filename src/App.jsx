@@ -51,7 +51,6 @@ const App = () => {
               <>
                 <NavBar />
                 <ProductDetails />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -64,7 +63,6 @@ const App = () => {
               <>
                 <NavBar />
                 <CheckOut />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -75,7 +73,6 @@ const App = () => {
               <>
                 <NavBar />
                 <Cart />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -86,7 +83,6 @@ const App = () => {
               <>
                 <NavBar />
                 <MenClothing />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -97,7 +93,6 @@ const App = () => {
               <>
                 <NavBar />
                 <Jewelery />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -108,7 +103,6 @@ const App = () => {
               <>
                 <NavBar />
                 <Electronics />
-                <BeforeFooter />
                 <Footer />
               </>
             }
@@ -119,7 +113,6 @@ const App = () => {
               <>
                 <NavBar />
                 <WomenClothes />
-                <BeforeFooter />
                 <Footer />
               </>
             }

@@ -23,13 +23,15 @@ const NavBar = () => {
     <Container fluid className={isDarkMode ? "bg-dark text-white" : ""}>
       <Row>
         <Col
-          className={`flex justify-between align-middle ${
-            isDarkMode ? "bg-dark text-white" : "bg-yellow-500 text-black"
+          className={`flex justify-between align-middle z-20 ${
+            isDarkMode
+              ? "brightness-90 bg-yellow-700  text-white "
+              : "bg-yellow-500 text-black"
           } items-center px-3`}
         >
           <Link
             to="/"
-            className={`hover:brightness-50 active:scale-95 transition-all duration-300 font-bold text-2xl sm:text-3xl flex no-underline ${
+            className={`hover:brightness-75 active:scale-95 transition-all duration-300 font-bold text-2xl sm:text-3xl flex no-underline ${
               isDarkMode ? "text-white" : "text-black"
             }`}
           >
@@ -39,8 +41,8 @@ const NavBar = () => {
           <div className="flex items-center justify-between transition-all duration-300 rounded-full w-44 p-2">
             {<DarkMode />}
             <div
-              className={`flex items-center justify-between transition-all duration-300 hover:brightness-50 rounded-full w-44 p-2 ${
-                isDarkMode ? "bg-secondary" : "bg-orange-600"
+              className={`flex items-center justify-between transition-all duration-300 hover:brightness-75 rounded-full w-44 p-2 ${
+                isDarkMode ? "bg-orange-700 brightness-90" : "bg-orange-600"
               }`}
             >
               <Link
