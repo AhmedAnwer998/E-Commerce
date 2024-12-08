@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import "./ProductDetails.css";
 import { ProductContext } from "../ProductContext/ProductContext";
 import { Container, Row, Col } from "react-bootstrap";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -52,11 +53,11 @@ const ProductDetails = () => {
           />
         </Col>
         <Col xl={8} className="flex flex-col justify-start items-start">
-          <h1>{selectedProduct.title}</h1>
-          <p className="font-semibold text-lg leading-8">
+          <h1 className="title">{selectedProduct.title}</h1>
+          <p className="descc font-semibold text-lg leading-8">
             {selectedProduct.description}
           </p>
-          <span className="font-bold text-xl"> $ {selectedProduct.price} </span>
+          <span className="pr font-bold text-xl"> $ {selectedProduct.price} </span>
           <div className="mt-1 mb-1 flex items-center">
             {renderStars(selectedProduct.rating.rate)}
             <span className="ml-2 text-sm text-gray-600">
@@ -64,7 +65,7 @@ const ProductDetails = () => {
             </span>
           </div>
           <button
-            className="px-2 py-2 rounded-full bg-amber-400 hover:bg-amber-500 active:bg-amber-200 active:scale-95 transition-all duration-300"
+            className="btnn  p-2 text-md rounded-full bg-amber-400 hover:bg-amber-500 active:bg-amber-200 active:scale-95 transition-all duration-300"
             onClick={handleAddToCart}
           >
             Add To Cart

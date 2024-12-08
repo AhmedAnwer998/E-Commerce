@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./ProductList.css";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./ProductList.css";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import { ProductContext } from "../ProductContext/ProductContext.jsx";
@@ -63,17 +63,21 @@ const ProductList = () => {
   }, [selectedCategory]);
 
   return (
-    <div className={isDarkMode ? "bg-dark text-white " : ""}>
+    <div
+      className={` overflow-hidden ${isDarkMode ? "bg-dark text-white" : ""}`}
+    >
       <div
-        className={`shadow-md z-20 ${
-          isDarkMode ? "bg-slate-800 brightness-90 text-white " : "bg-amber-500"
+        className={`biggg-cont py-2  z-50 shadow-md  ${
+          isDarkMode ? "bg-gray-800 text-white" : "bg-amber-500"
         }`}
+        style={{ position: "relative", overflow: "visible" }}
       >
-        <Container fluid className="py-2">
-          <div className=" flex justify-between">
+        <Container fluid className="big-cont ">
+          <div className="flex justify-between ">
             <div
-              className="remove-992 gap-3 me-auto flex items-center"
+              className="remove-992 gap-3 flex items-center"
               style={{ maxHeight: "100px" }}
+              navbarScroll
             >
               <SideBarCategory />
               <Link
@@ -144,17 +148,20 @@ const ProductList = () => {
               </div>
             </div>
             <div className="bigg-div">
-              <form onSubmit={handleSearch} className="flex big-big-div">
+              <form
+                onSubmit={handleSearch}
+                className="big-big-div flex group relative"
+              >
                 <div
                   id="category-width"
-                  className="px-4 cursor-pointer text-sm pointer-events-none invisible flex items-center justify-center"
+                  className="category-search px-4 cursor-pointer text-sm pointer-events-none invisible flex items-center justify-center"
                   style={{ visibility: "hidden" }}
                 >
                   {selectedCategory}
                 </div>
                 <div
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className={ `relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center border ${
+                  className={`category-search1 group relative cursor-pointer left-0 !rounded-s-full px-2 py-1 text-sm font-medium flex items-center justify-center border ${
                     isDarkMode ? "bg-dark text-white" : "bg-white text-black"
                   }`}
                   style={{ width: selectedCategoryWidth }}
@@ -163,7 +170,7 @@ const ProductList = () => {
                   <IoMdArrowDropdown className="ml-1" />
                   {isDropdownOpen && (
                     <ul
-                      className={`absolute z-50 top-full left-0 shadow-lg rounded-lg w-48 px-2 py-2 ${
+                      className={`absolute z-[100] top-full left-0 shadow-lg rounded-lg w-48 p-2 ${
                         isDarkMode
                           ? "bg-dark text-white"
                           : "bg-white text-black"
@@ -172,7 +179,7 @@ const ProductList = () => {
                       {categories.map((category, index) => (
                         <li
                           key={index}
-                          className={`block px-2 py-2 z-50  rounded-lg cursor-pointer ${isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
+                          className={`block px-2 py-2 hover:bg-gray-100 rounded-lg cursor-pointer ${isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
                           onClick={() => handleChangeCategory(category)}
                         >
                           {category}
@@ -185,7 +192,7 @@ const ProductList = () => {
                   <input
                     type="search"
                     placeholder="Search"
-                    className={`fill-the-screen me-2 w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border px-2 pe-4 py-1 outline-none placeholder:text-sm ${
+                    className={`fill-the-screen me-2 w-52 sm:w-48 hover:w-80 transition-all duration-1000 ease-in-out rounded-e-full border px-2 pe-4 py-1 outline-none placeholder:text-sm ${
                       isDarkMode ? "text-white bg-dark" : "text-black"
                     }`}
                     aria-label="Search"
@@ -218,18 +225,18 @@ const ProductList = () => {
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}
-                  className={`no-underline shadow-md rounded-md ${
-                    isDarkMode ? "text-white bg-dark" : "text-black"
+                  className={`no-underline shadow-md rounded-md  ${
+                    isDarkMode ? "bg-gray-800 text-white" : "text-black"
                   }`}
                 >
                   <div className="h-64 flex items-center justify-center ">
                     <img
                       src={product.image}
                       alt="product-img"
-                      className="h-full object-contain "
+                      className="h-full object-contain p-3"
                     />
                   </div>
-                  <p className="font-semibold h-12 flex items-center justify-center text-center">
+                  <p className="title-clamp font-semibold h-12 flex items-center justify-center text-center">
                     {product.title}
                   </p>
                 </Link>
@@ -259,5 +266,5 @@ const ProductList = () => {
     </div>
   );
 };
-                
+
 export default ProductList;

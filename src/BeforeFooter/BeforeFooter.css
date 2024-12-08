@@ -1,0 +1,49 @@
+@media (max-width: 768px) {
+    .p1{
+        font-size: .9rem;
+    }
+    .h1{
+        font-size: 1.6rem;
+    }
+    .p2{
+        font-size: .8rem;
+    }
+  .img {
+    width: 70px;
+  }
+  .comma {
+    font-size: 100px;
+  }
+  .txt {
+    font-size: 0.7rem;
+    display: -webkit-box; /* Establishes a flexible container */
+    -webkit-line-clamp: 2; /* Limits the text to 2 lines */
+    -webkit-box-orient: vertical; /* Specifies the orientation of the box (vertical) */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds the ellipsis at the end */
+  }
+  .nam{
+    font-size: .7rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .img {
+    width: 50px;
+  }
+  .comma{
+    font-size: 60px;
+  }
+  .txt{
+    font-size: 0.6rem;
+  }
+  .p1{
+    font-size: .8rem;
+  }
+  .h1{
+    font-size: 1.4rem;
+  }
+  .p2{
+    font-size: .8rem;
+  }
+}

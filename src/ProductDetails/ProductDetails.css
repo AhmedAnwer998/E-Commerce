@@ -1,0 +1,15 @@
+@media (max-width: 768px){
+    .descc{
+        font-weight: normal;
+        line-height: 1.2rem;
+        font-size: 1rem;
+    }
+    .title{
+        font-size: 1.5rem;
+    }
+    .btnn{
+        padding: 1px;
+        font-size: .9rem;
+        width: 100px;
+    }
+}

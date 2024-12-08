@@ -81,6 +81,12 @@ const WomenClothes = ({ limit }) => {
                 <span className="font-bold text-sm md:text-lg">
                   Price: ${product.price}
                 </span>
+                <div className="mt-1 flex items-center">
+                  {renderStars(product.rating.rate)}
+                  <span className="ml-2 text-sm text-gray-600">
+                    ({product.rating.rate})
+                  </span>
+                </div>
                 <Link
                   to={`/products/${product.id}`}
                   onClick={() => handleSelectedProduct(product)}

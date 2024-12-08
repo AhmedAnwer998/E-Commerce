@@ -60,7 +60,7 @@ const SignIn = () => {
 
   return (
     <div
-      className={`flex justify-center items-center h-screen ${
+      className={`flex justify-center items-center h-screen p-2 ${
         isDarkMode ? "bg-dark text-white" : "bg-white text-black"
       }`}
     >
@@ -72,7 +72,7 @@ const SignIn = () => {
       >
         <div className="flex justify-center items-center flex-col">
           <img src={logo} alt="logo" className="w-10" />
-          <h1 className="text-2xl font-semibold">Log In to Easy Shopping</h1>
+          <h1 className="text-2xl text-center font-semibold">Log In to Easy Shopping</h1>
           <span className="text-sm text-gray-500">
             Welcome, please sign in to continue
           </span>

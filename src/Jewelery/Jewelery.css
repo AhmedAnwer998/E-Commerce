@@ -1,0 +1,7 @@
+.titlee{
+    display: -webkit-box; /* Establishes a flexible container */
+    -webkit-line-clamp: 2; /* Limits the text to 2 lines */
+    -webkit-box-orient: vertical; /* Specifies the orientation of the box (vertical) */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds the ellipsis at the end */
+}

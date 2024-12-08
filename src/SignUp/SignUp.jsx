@@ -59,23 +59,23 @@ const SignUp = () => {
 
   return (
     <div
-      className={`flex justify-center items-center min-h-screen ${isDarkMode ? "bg-dark" : "bg-white"}`}
+      className={`flex justify-center items-center min-h-screen p-2 ${isDarkMode ? "bg-dark" : "bg-white"}`}
     >
       <form
         onSubmit={signUp}
         className={`flex flex-col shadow-[0_1px_18px_rgba(0,0,0,0.4)] p-5 rounded-md ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
       >
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col text-center">
           <img src={logo} alt="logo" className="w-10" />
           <h1
             className={`text-2xl font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}
           >
-            Create Account in Easy Shopping
+            Welcome, in Easy Shopping
           </h1>
           <span
             className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}
           >
-            Welcome, please create your account to continue
+             Please create your account to continue
           </span>
         </div>
         <div className="flex flex-col mt-3 gap-[]">

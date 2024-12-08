@@ -1,21 +1,31 @@
-
-@media (max-width: 992px){
-.remove-992{
-    display: none;
+.title-clamp{
+    display: -webkit-box; /* Establishes a flexible container */
+    -webkit-line-clamp: 2; /* Limits the text to 2 lines */
+    -webkit-box-orient: vertical; /* Specifies the orientation of the box (vertical) */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds the ellipsis at the end */
 }
 
-.bigg-div{
+
+@media (max-width: 992px) {
+  .category-search,
+  .category-search1,
+  .remove-992 {
+    display: none;
+  }
+
+  .bigg-div {
     margin: 0;
     padding: 0;
-}
-.bigg-div,
-.big-big-div,
-.big-div{
+  }
+  .bigg-div,
+  .big-big-div,
+  .big-div {
     width: 100%;
-
-}
-.fill-the-screen{
+  }
+  .fill-the-screen {
     width: 100% !important;
     max-width: 100%;
+    border-radius: 10px;
   }
 }

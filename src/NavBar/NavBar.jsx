@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from "react";
+import "./NavBar.css";
 import { FaCartPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "/images/logo.png";
@@ -31,17 +32,17 @@ const NavBar = () => {
         >
           <Link
             to="/"
-            className={`hover:brightness-75 active:scale-95 transition-all duration-300 font-bold text-2xl sm:text-3xl flex no-underline ${
+            className={`logo-name hover:brightness-75 active:scale-95 transition-all duration-300 font-bold text-2xl flex justify-center items-center no-underline ${
               isDarkMode ? "text-white" : "text-black"
             }`}
           >
-            <img src={logo} alt="logo" className="w-10" />
+            <img src={logo} alt="logo" className="logo w-10" />
             Easy Shopping
           </Link>
-          <div className="flex items-center justify-between transition-all duration-300 rounded-full w-44 p-2">
-            {<DarkMode />}
+          <div className="div1 flex items-center justify-between transition-all duration-300 rounded-full w-44 p-2">
+            <div className="dark-mode mx-auto">{<DarkMode />}</div>
             <div
-              className={`flex items-center justify-between transition-all duration-300 hover:brightness-75 rounded-full w-44 p-2 ${
+              className={`flex items-center justify-between transition-all duration-300 hover:brightness-75 rounded-full w-20 p-2 ${
                 isDarkMode ? "bg-orange-700 brightness-90" : "bg-orange-600"
               }`}
             >

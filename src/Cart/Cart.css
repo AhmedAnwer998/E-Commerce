@@ -1,0 +1,43 @@
+@media (max-width: 1200px) {
+  .cont {
+    flex-wrap: wrap;
+  }
+
+  .total {
+    align-self: flex-start;
+    margin-top: 0;
+    order: -1; /* Moves the element to the top */
+    width: 100%; /* Optional: Ensures it spans full width */
+  }
+}
+
+
+
+
+
+
+@media (max-width: 550px){
+    .imagee{
+        width: 120px;
+        margin-left: 7px;
+    }
+    .desc{
+        font-size: .9rem;
+        line-height: 1rem;
+    }
+    .prr{
+        font-size: .9rem;
+        margin-top: 0;
+    }
+    .qty{
+        width: 4rem;
+        margin-top: 0;
+    }
+    .minus,
+    .plus{
+        width: 1.4rem;
+    }
+    .remove{
+        font-size: .8rem;
+    }
+}

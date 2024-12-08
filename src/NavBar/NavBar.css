@@ -1,0 +1,19 @@
+@media (max-width: 560px){
+    .div1{
+        justify-self: end;
+    }
+    .logo-name{
+        font-size: 1.3rem !important;
+    }
+    .logo{
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+}
+
+@media (max-width: 380px){
+        .logo-name{
+        font-size: .8rem !important;
+        flex-direction: column;
+    }
+}
