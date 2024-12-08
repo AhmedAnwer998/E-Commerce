@@ -1,12 +1,12 @@
 @media (max-width: 768px) {
     .p1{
-        font-size: .9rem;
+        font-size: 1rem;
     }
     .h1{
         font-size: 1.6rem;
     }
     .p2{
-        font-size: .8rem;
+        font-size: .9rem;
     }
   .img {
     width: 70px;
@@ -15,7 +15,7 @@
     font-size: 100px;
   }
   .txt {
-    font-size: 0.7rem;
+    font-size: 1rem;
     display: -webkit-box; /* Establishes a flexible container */
     -webkit-line-clamp: 2; /* Limits the text to 2 lines */
     -webkit-box-orient: vertical; /* Specifies the orientation of the box (vertical) */
@@ -23,19 +23,22 @@
     text-overflow: ellipsis; /* Adds the ellipsis at the end */
   }
   .nam{
-    font-size: .7rem;
+    font-size: 1.1rem;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 520px) {
   .img {
-    width: 50px;
+    width: 70px;
+  }
+  .nam{
+    font-size: 1rem;
   }
   .comma{
-    font-size: 60px;
+    font-size: 80px;
   }
   .txt{
-    font-size: 0.6rem;
+    font-size: 0.9rem;
   }
   .p1{
     font-size: .8rem;

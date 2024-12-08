@@ -56,7 +56,7 @@ const BeforeFooter = () => {
         },
       },
       {
-        breakpoint: 480, // Screen width <= 480px
+        breakpoint: 520, // Screen width <= 480px
         settings: {
           slidesToShow: 1, // Show 1 slide
           slidesToScroll: 1,
