@@ -100,7 +100,7 @@ const BeforeFooter = () => {
                   <img
                     src={beforeFooterr.img}
                     alt="gg"
-                    className="img rounded-full"
+                    className="img rounded-full mb-1"
                   />
                 </div>
                 <div>
