@@ -42,7 +42,7 @@ const Offers = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 800,
+    speed: 300,
     autoplaySpeed: 4000,
     rtl: true,
     pauseOnHover: false,
