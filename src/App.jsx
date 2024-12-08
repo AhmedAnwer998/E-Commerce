@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductList from "./ProductList/ProductList";
 import { ProductProvider } from "./ProductContext/ProductContext";
 import ProductDetails from "./ProductDetails/ProductDetails";
@@ -23,6 +23,7 @@ const App = () => {
     AOS.init({
       offset: 100,
       duration: 800,
+      once: true,
       easing: "ease-in-sine",
       delay: 100,
     });
