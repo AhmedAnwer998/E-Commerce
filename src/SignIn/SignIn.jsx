@@ -37,7 +37,7 @@ const SignIn = () => {
         alert(
           `Welcome back, ${user.displayName}! Please complete your profile.`
         );
-        navigate("/SignUp");
+        navigate("/");
       }
     } catch (error) {
       console.error("Error during third-party sign-in:", error);
@@ -51,7 +51,7 @@ const SignIn = () => {
       await signInWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
-      navigate("/CheckOut");
+      navigate("/");
     } catch (error) {
       navigate("/SignUp");
       console.error("Error signing in:", error);

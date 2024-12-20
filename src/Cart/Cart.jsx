@@ -1,13 +1,85 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Cart.css";
 import { ProductContext } from "../ProductContext/ProductContext";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTheme } from "../ThemeContext/ThemeContext";
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 
 const Cart = () => {
-  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
-    useContext(ProductContext);
+  const {
+    cart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    calculateSubTotalPrice,
+    calculateTotalQuantities,
+    clearCart,
+  } = useContext(ProductContext);
+
+  const navigate = useNavigate();
+  const auth = getAuth(); 
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Monitor authentication state
+ useEffect(() => {
+   const unsubscribe = onAuthStateChanged(auth, (user) => {
+     setIsAuthenticated(!!user); // Set true if user exists
+   });
+   return () => unsubscribe();
+ }, []);
+
+
+  const handletoken = async (token) => {
+    const cartDetails = {
+      name: "All Products",
+      totalPrice: calculateSubTotalPrice(cart),
+    };
+    try {
+      const response = await axios.post("http://localhost:8081/checkout", {
+        token,
+        cart: cartDetails,
+      });
+      const { status } = response.data;
+
+      if (status === "success") {
+
+// Clear the cart in the local state
+         console.log("Payment successful. Clearing cart...");
+         await clearCartInFirebase(); // Clear Firebase cart if applicable
+         clearCart(); // Clear local cart
+         console.log("Cart after clearing:", cart);
+     
+        
+        toast.success("Your order has been placed successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        navigate("/");
+      } else {
+        toast.error("Payment failed. Please try again.", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      }
+    } catch (error) {
+      console.error("Payment error: ", error);
+      toast.error("An error occurred during the payment process.", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    }
+  };
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
@@ -21,19 +93,19 @@ const Cart = () => {
     decreaseQuantity(productId);
   };
 
-  const calculateSubTotal = () => {
-    return cart
-      .reduce((acc, product) => acc + product.price * product.quantity, 0)
-      .toFixed(2);
+  const { isDarkMode } = useTheme();
+
+  // payment
+
+  const handleProceedToBuy = () => {
+    if (isAuthenticated) {
+      // User is signed in, proceed to payment
+      toast.info("Proceeding to payment...");
+    } else {
+      // Redirect to SignIn page
+      navigate("/SignIn");
+    }
   };
-
-  const calculateTotalQuantities = () => {
-    return cart.reduce((acc, product) => acc + product.quantity, 0);
-  };
-
-
-  const {isDarkMode} = useTheme();
-
 
   return (
     <div className={`cont py-4  ${isDarkMode ? "bg-dark text-gray-300" : ""}`}>
@@ -110,14 +182,25 @@ const Cart = () => {
                       md={12}
                       className={`total mb-2 h-52 shadow-md ${isDarkMode ? "hover:bg-slate-800 hover:shadow-xl" : "hover:bg-slate-100 hover:shadow-xl"} transition-all duration-300 flex flex-col items-center rounded-lg`}
                     >
-                      <h2>Items: {calculateTotalQuantities()}</h2>
-                      <h2>Subtotal: ${calculateSubTotal()}</h2>
-                      <Link
-                        to={`/SignIn`}
-                        className="mt-2 px-4 py-2 bg-amber-500 text-white no-underline rounded-full hover:bg-amber-600 transition-all duration-300"
-                      >
-                        Proceed To Buy
-                      </Link>
+                      <h2>Items: {calculateTotalQuantities(cart)}</h2>
+                      <h2>Subtotal: ${calculateSubTotalPrice(cart)}</h2>
+                      <div>
+                        <StripeCheckout
+                          stripeKey="pk_test_51QVoljFHGnkbxB3AopE2T5X9YqMIvFgVfuhf916MVkwVy1EnWJKDVf5NX0ww0kM6cTneV9Nihk8lYGH47HaBhma800uZqye7Rx"
+                          token={handletoken}
+                          billingAddress
+                          shippingAddress
+                          name="All Products"
+                          amount={calculateSubTotalPrice(cart) * 100}
+                        >
+                          <button
+                            onClick={() => handleProceedToBuy()}
+                            className="mt-2 px-4 py-2 bg-amber-500 text-white no-underline rounded-full hover:bg-amber-600 transition-all duration-300"
+                          >
+                            Proceed To Buy
+                          </button>
+                        </StripeCheckout>
+                      </div>
                     </Col>
                   )}
                 </Row>

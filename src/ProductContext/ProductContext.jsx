@@ -16,8 +16,6 @@ export const ProductProvider = ({ children }) => {
 
   const success = () => {
 
-    
-
     messageApi.open({
       type: "success",
       content: `Added to your cart!`,
@@ -94,9 +92,22 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const calculateSubTotalPrice = () => {
+    return cart
+      .reduce((acc, product) => acc + product.price * product.quantity, 0)
+      .toFixed(2);
+  };
+
+
   const calculateTotalQuantities = () => {
     return cart.reduce((acc, product) => acc + product.quantity, 0);
   };
+
+const clearCart = () => {
+  setCart([]); // Empty the cart array
+};
+
+
 
   return (
     <ProductContext.Provider
@@ -105,12 +116,14 @@ export const ProductProvider = ({ children }) => {
         products,
         selectedProduct,
         setSelectedProduct,
+        calculateSubTotalPrice,
         calculateTotalQuantities,
         cart,
         addToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,
         categories,
       }}
     >

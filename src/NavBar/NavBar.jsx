@@ -1,6 +1,8 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState, useEffect } from "react";
 import "./NavBar.css";
 import { FaCartPlus } from "react-icons/fa";
+import { GoSignIn } from "react-icons/go";
+import { GoSignOut } from "react-icons/go";
 import { Link } from "react-router-dom";
 import logo from "/images/logo.png";
 import { Container, Row, Col } from "react-bootstrap";
@@ -9,6 +11,7 @@ import DarkMode from "../DarkMode/DarkMode";
 import { VscAccount } from "react-icons/vsc";
 import { ProductContext } from "../ProductContext/ProductContext";
 import { useTheme } from "../ThemeContext/ThemeContext"; // Import the useTheme hook
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"; // Import Firebase auth
 
 const NavBar = () => {
   const { calculateTotalQuantities } = useContext(ProductContext);
@@ -19,6 +22,27 @@ const NavBar = () => {
     () => calculateTotalQuantities(),
     [calculateTotalQuantities]
   );
+
+ const [user, setUser] = useState(null); // Store the user object
+ const auth = getAuth();
+
+
+  // Monitor authentication state
+   useEffect(() => {
+     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+       setUser(currentUser); // Update user state
+     });
+     return () => unsubscribe();
+   }, []);
+
+  // Handle sign out
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <Container fluid className={isDarkMode ? "bg-dark text-white" : ""}>
@@ -42,7 +66,7 @@ const NavBar = () => {
           <div className="div1 flex items-center justify-between transition-all duration-300 rounded-full w-44 p-2">
             <div className="dark-mode mx-auto">{<DarkMode />}</div>
             <div
-              className={`flex items-center justify-between transition-all duration-300 hover:brightness-75 rounded-full w-20 p-2 ${
+              className={`flex items-center justify-between transition-all duration-300 gap-1 hover:brightness-75 rounded-full w-20 p-2 ${
                 isDarkMode ? "bg-orange-700 brightness-90" : "bg-orange-600"
               }`}
             >
@@ -57,12 +81,35 @@ const NavBar = () => {
                   </div>
                 )}
               </Link>
-              <Link
-                to="/SignIn"
-                className="no-underline active:scale-95 text-white"
-              >
-                <VscAccount className="text-xl font-semibold" />
-              </Link>
+              {user ? (
+                <div className="flex items-center">
+                  {/* User profile image */}
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt="User Profile"
+                      className="w-5 h-5 rounded-full mx-1"
+                    />
+                  ) : (
+                    <VscAccount className="text-xl mx-1 text-white font-semibold" />
+                  )}
+
+                  <button
+                    onClick={handleSignOut}
+                    className="no-underline bg-transparent border-none text-white flex items-center"
+                  >
+                    <GoSignOut />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/SignIn"
+                  className="no-underline active:scale-95 text-white flex items-center"
+                >
+                  <VscAccount className="text-xl mx-1 text-white font-semibold" />
+                  <GoSignIn />
+                </Link>
+              )}
             </div>
           </div>
         </Col>

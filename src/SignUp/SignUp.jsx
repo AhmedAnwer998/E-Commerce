@@ -34,7 +34,7 @@ const SignUp = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       alert(`Successfully signed in as ${result.user.displayName}`);
-      navigate("/CheckOut");
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
@@ -51,7 +51,7 @@ const SignUp = () => {
       setEmail("");
       setPassword("");
       setConfirm_password("");
-      navigate("/CheckOut");
+      navigate("/");
     } catch (error) {
       console.error("Error creating user:", error);
     }
