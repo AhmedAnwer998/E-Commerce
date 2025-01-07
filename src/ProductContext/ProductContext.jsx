@@ -92,20 +92,24 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const calculateSubTotalPrice = () => {
-    return cart
-      .reduce((acc, product) => acc + product.price * product.quantity, 0)
-      .toFixed(2);
-  };
+const calculateSubTotalPrice = () => {
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+};
 
 
   const calculateTotalQuantities = () => {
     return cart.reduce((acc, product) => acc + product.quantity, 0);
   };
 
+
+
 const clearCart = () => {
-  setCart([]); // Empty the cart array
+  console.log("Clearing cart...");
+  setCart([]); // Reset the cart state to an empty array
 };
+
+
+
 
 
 

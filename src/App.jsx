@@ -16,13 +16,11 @@ import BeforeFooter from "./BeforeFooter/BeforeFooter";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import { ThemeProvider } from "./ThemeContext/ThemeContext";
-import { loadStripe } from "@stripe/stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
-// import Payment from "./Payment/Payment";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import StripeApp from "./StripeApp";
+import ReturnPage from "./ReturnPage";
 
-const stripePromise = loadStripe(
-  "pk_test_51QVoljFHGnkbxB3AopE2T5X9YqMIvFgVfuhf916MVkwVy1EnWJKDVf5NX0ww0kM6cTneV9Nihk8lYGH47HaBhma800uZqye7Rx"
-);
 const App = () => {
   React.useEffect(() => {
     AOS.init({
@@ -39,6 +37,7 @@ const App = () => {
     <BrowserRouter>
       <ProductProvider>
         <ThemeProvider>
+          <ToastContainer />
           <Routes>
             <Route
               path="/"
@@ -63,19 +62,16 @@ const App = () => {
             />
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/SignIn" element={<SignIn />} />
-            {/* <Route
-              path="/Payment"
-              element={
-                <>
-                  <NavBar />
-                  <Elements stripe={stripePromise}>
-                    <Payment />
-                  </Elements>
 
-                  <Footer />
-                </>
-              }
-            /> */}
+            <Route path="/checkout" element={<StripeApp />} />
+            <Route path="/return" element={<ReturnPage />} />
+
+            <Route
+              path="/success"
+              element={<div>Payment was successful!</div>}
+            />
+            <Route path="/cancel" element={<div>Payment was canceled.</div>} />
+
             <Route
               path="/Cart"
               element={
