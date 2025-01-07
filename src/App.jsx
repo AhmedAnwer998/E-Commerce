@@ -18,8 +18,8 @@ import SignUp from "./SignUp/SignUp";
 import { ThemeProvider } from "./ThemeContext/ThemeContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import StripeApp from "./StripeApp";
 import ReturnPage from "./ReturnPage";
+import { StripeApp } from "./StripeApp";
 
 const App = () => {
   React.useEffect(() => {
