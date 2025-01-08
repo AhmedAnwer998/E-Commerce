@@ -21,8 +21,8 @@ app.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       customer_email: customerEmail,
       success_url:
-        "http://localhost:5173/?session_id={CHECKOUT_SESSION_ID}", // Redirect to success page with session_id
-      cancel_url: "http://localhost:5173/", // Redirect to cancel page
+        "http://e-commerce-eta-snowy-81.vercel.app/", // Redirect to success page with session_id
+      cancel_url: "http://e-commerce-eta-snowy-81.vercel.app/", // Redirect to cancel page
     });
 
     // Send the sessionId back to the frontend
