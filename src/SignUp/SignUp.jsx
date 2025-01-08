@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "/images/logo.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
@@ -19,16 +19,12 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_password] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  const {isDarkMode} = useTheme();
-
+  const { isDarkMode } = useTheme();
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
-
-
-
 
   const handleThirdPartySignIn = async (provider) => {
     try {
@@ -36,14 +32,14 @@ const SignUp = () => {
       alert(`Successfully signed in as ${result.user.displayName}`);
       navigate("/");
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
   const signUp = async (e) => {
     e.preventDefault();
     if (password !== confirm_password) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
     try {
@@ -53,152 +49,176 @@ const SignUp = () => {
       setConfirm_password("");
       navigate("/");
     } catch (error) {
-      console.error("Error creating user:", error);
+      setError(error.message);
     }
   };
 
   return (
     <div
-      className={`flex justify-center items-center min-h-screen p-2 ${isDarkMode ? "bg-dark" : "bg-white"}`}
+      className={`flex justify-center items-center min-h-screen p-2 ${
+        isDarkMode ? "bg-dark" : "bg-white"
+      }`}
     >
       <form
         onSubmit={signUp}
-        className={`flex flex-col shadow-[0_1px_18px_rgba(0,0,0,0.4)] p-5 rounded-md ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
+        className={`flex flex-col shadow-[0_1px_18px_rgba(0,0,0,0.4)] p-5 rounded-md ${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        } w-full max-w-md`}
       >
         <div className="flex justify-center items-center flex-col text-center">
           <img src={logo} alt="logo" className="w-10" />
           <h1
-            className={`text-2xl font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}
+            className={`text-2xl font-semibold ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
           >
-            Welcome, in Easy Shopping
+            Welcome to Easy Shopping
           </h1>
           <span
-            className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}
+            className={`text-sm ${
+              isDarkMode ? "text-gray-300" : "text-gray-500"
+            }`}
           >
-             Please create your account to continue
+            Please create your account to continue
           </span>
         </div>
-        <div className="flex flex-col mt-3 gap-[]">
+        {error && (
+          <div className="text-red-500 text-sm text-center mt-2">{error}</div>
+        )}
+        <div className="flex flex-col mt-3 gap-2">
           <button
             onClick={() => handleThirdPartySignIn(facebookProvider)}
             type="button"
-            className="flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full my-1"
+            className={`flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full ${
+              isDarkMode ? "text-white" : "text-gray-600"
+            }`}
+            aria-label="Sign up with Facebook"
           >
             <FaFacebook className="text-2xl text-blue-500" />
-            <span className="text-gray-600 font-sans text-md">
-              Sign Up with Facebook
-            </span>
+            <span>Sign Up with Facebook</span>
           </button>
           <button
             onClick={() => handleThirdPartySignIn(googleProvider)}
             type="button"
-            className="flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full my-1"
+            className={`flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full ${
+              isDarkMode ? "text-white" : "text-gray-600"
+            }`}
+            aria-label="Sign up with Google"
           >
             <FcGoogle className="text-2xl" />
-            <span className="text-gray-600 font-sans text-md">
-              Sign Up with Google
-            </span>
+            <span>Sign Up with Google</span>
           </button>
         </div>
-        {/* Divider with "or" */}
         <div className="my-2 flex items-center justify-center">
           <hr className="flex-grow border-gray-600" />
-          <span className=" mx-2 text-[17px] text-gray-400"> or </span>
+          <span className="mx-2 text-[17px] text-gray-400">or</span>
           <hr className="flex-grow border-gray-600" />
         </div>
-
-        {/* Floating Labels for Inputs */}
-        {/* Name Field */}
         <div className="relative mb-3">
           <input
             type="text"
             id="user_name"
             value={user_name}
             onChange={(e) => setUser_name(e.target.value)}
-            className={`peer w-full px-2 py-1 border !border-gray-900 rounded-md focus:outline-none focus:!border-blue-400 ${isDarkMode ? "bg-white text-gray-700" : "bg-white"}`}
+            className={`peer w-full px-2 py-1 border ${
+              isDarkMode ? "border-gray-600" : "border-gray-900"
+            } rounded-md focus:outline-none focus:border-blue-400 ${
+              isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+            }`}
             placeholder=" "
             required
           />
           <label
             htmlFor="user_name"
-            className={`absolute px-1 bg-white left-3 transition-all ${
+            className={`absolute px-1 left-3 transition-all ${
               user_name
-                ? "top-[-10px] bg-white text-[13px] text-sky-500"
+                ? "top-[-10px] text-[13px] text-sky-500"
                 : "top-1 text-gray-500"
-            }`}
+            } ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
           >
             Your name
           </label>
         </div>
-        {/* Email Field */}
         <div className="relative mb-3">
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`peer w-full px-2 py-1 border !border-gray-900 rounded-md focus:outline-none focus:!border-blue-400 ${isDarkMode ? "bg-white text-gray-700" : "bg-white"}`}
+            className={`peer w-full px-2 py-1 border ${
+              isDarkMode ? "border-gray-600" : "border-gray-900"
+            } rounded-md focus:outline-none focus:border-blue-400 ${
+              isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+            }`}
             placeholder=" "
             required
           />
           <label
             htmlFor="email"
-            className={`absolute px-1 bg-white left-3 transition-all ${
+            className={`absolute px-1 left-3 transition-all ${
               email
-                ? "top-[-10px] bg-white text-[13px] text-sky-500"
+                ? "top-[-10px] text-[13px] text-sky-500"
                 : "top-1 text-gray-500"
-            }`}
+            } ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
           >
             Email
           </label>
         </div>
-        {/* Password Field */}
         <div className="relative mb-3">
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={`peer w-full px-2 py-1 border !border-gray-900 rounded-md focus:outline-none focus:!border-blue-400 ${isDarkMode ? "bg-white text-gray-700" : "bg-white"}`}
+            className={`peer w-full px-2 py-1 border ${
+              isDarkMode ? "border-gray-600" : "border-gray-900"
+            } rounded-md focus:outline-none focus:border-blue-400 ${
+              isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+            }`}
             placeholder=" "
             required
           />
           <label
             htmlFor="password"
-            className={`absolute px-1 bg-white left-3 transition-all ${
+            className={`absolute px-1 left-3 transition-all ${
               password
-                ? "top-[-10px] bg-white text-[13px] text-sky-500"
+                ? "top-[-10px] text-[13px] text-sky-500"
                 : "top-1 text-gray-500"
-            }`}
+            } ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
           >
             Password
           </label>
         </div>
-        {/* Confirm Password Field */}
         <div className="relative mb-3">
           <input
             type="password"
             id="confirm_password"
             value={confirm_password}
             onChange={(e) => setConfirm_password(e.target.value)}
-            className={`peer w-full px-2 py-1 border !border-gray-900 rounded-md focus:outline-none focus:!border-blue-400 ${isDarkMode ? "bg-white text-gray-700" : "bg-white"}`}
+            className={`peer w-full px-2 py-1 border ${
+              isDarkMode ? "border-gray-600" : "border-gray-900"
+            } rounded-md focus:outline-none focus:border-blue-400 ${
+              isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+            }`}
             placeholder=" "
             required
           />
           <label
             htmlFor="confirm_password"
-            className={`absolute px-1 bg-white left-3 transition-all ${
+            className={`absolute px-1 left-3 transition-all ${
               confirm_password
-                ? "top-[-10px] bg-white text-[13px] text-sky-500"
+                ? "top-[-10px] text-[13px] text-sky-500"
                 : "top-1 text-gray-500"
-            }`}
+            } ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
           >
             Re-enter password
           </label>
         </div>
         <button
           type="submit"
-          className={`my-4 text-sm border border-sky-500 py-1 text-sky-700 rounded-md hover:bg-blue-50 `}
+          className={`my-4 text-sm border border-sky-500 py-1 text-sky-700 rounded-md hover:bg-blue-50 ${
+            isDarkMode ? "text-white" : "text-sky-700"
+          }`}
         >
           Create Account
         </button>
