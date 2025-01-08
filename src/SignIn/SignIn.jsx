@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "/images/logo.png";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import "@fontsource/roboto";
 import "@fontsource/montserrat";
 import {
@@ -21,7 +20,6 @@ const SignIn = () => {
   const { isDarkMode } = useTheme(); // Access the dark mode state
 
   const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
 
   const handleThirdPartySignIn = async (provider) => {
     try {
@@ -78,16 +76,7 @@ const SignIn = () => {
           </span>
         </div>
         <div className="flex flex-col mt-3">
-          <button
-            onClick={() => handleThirdPartySignIn(facebookProvider)}
-            type="button"
-            className="flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full my-1"
-          >
-            <FaFacebook className="text-2xl text-blue-500" />
-            <span className="text-gray-600 font-sans text-md">
-              Sign In with Facebook
-            </span>
-          </button>
+       
           <button
             onClick={() => handleThirdPartySignIn(googleProvider)}
             type="button"

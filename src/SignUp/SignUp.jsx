@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import logo from "/images/logo.png";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import "@fontsource/roboto";
 import "@fontsource/montserrat";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "../Firebase/Firebase";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +22,6 @@ const SignUp = () => {
   const { isDarkMode } = useTheme();
 
   const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
 
   const handleThirdPartySignIn = async (provider) => {
     try {
@@ -86,17 +83,7 @@ const SignUp = () => {
           <div className="text-red-500 text-sm text-center mt-2">{error}</div>
         )}
         <div className="flex flex-col mt-3 gap-2">
-          <button
-            onClick={() => handleThirdPartySignIn(facebookProvider)}
-            type="button"
-            className={`flex justify-center items-center gap-2 border border-sky-400 py-1 rounded-md hover:bg-blue-50 w-full ${
-              isDarkMode ? "text-white" : "text-gray-600"
-            }`}
-            aria-label="Sign up with Facebook"
-          >
-            <FaFacebook className="text-2xl text-blue-500" />
-            <span>Sign Up with Facebook</span>
-          </button>
+ 
           <button
             onClick={() => handleThirdPartySignIn(googleProvider)}
             type="button"
