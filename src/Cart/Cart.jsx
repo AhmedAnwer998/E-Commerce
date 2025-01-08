@@ -54,9 +54,9 @@ const Cart = () => {
         "pk_test_51QZDgFGqLw8AAx3CPbhPTvEwggjHVtZLbxIjfDLEywnfm4A8cASX8AxoqP1K2r8u4JMVwbqFEDIwfGjPEMpexKdM00rQBhh1dw"
       );
 
-      // Use your local IP address
+      // Use the emulator endpoint
       const response = await fetch(
-        "http://192.168.1.100:5002/e-commerce-681c3/us-central1/createCheckoutSession/create-checkout-session",
+        "http://127.0.0.1:5002/e-commerce-681c3/us-central1/createCheckoutSession/create-checkout-session",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

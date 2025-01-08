@@ -8,6 +8,8 @@ const functions = require("firebase-functions");
 const app = express();
 app.use(bodyParser.json());
 
+
+
 // Create a Stripe Checkout session
 app.post("/create-checkout-session", async (req, res) => {
   try {
@@ -19,8 +21,8 @@ app.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       customer_email: customerEmail,
       success_url:
-        "http://192.168.1.100:4000/success?session_id={CHECKOUT_SESSION_ID}", // Use your local IP address
-      cancel_url: "http://192.168.1.100:4000/cancel", // Use your local IP address
+        "http://localhost:4000/success?session_id={CHECKOUT_SESSION_ID}", // Redirect to success page with session_id
+      cancel_url: "http://localhost:4000/cancel", // Redirect to cancel page
     });
 
     // Send the sessionId back to the frontend
@@ -49,13 +51,6 @@ app.get("/session_status", async (req, res) => {
     console.error("Error fetching session status:", error);
     res.status(500).send(error.message);
   }
-});
-
-// Start the server on your local IP address
-const PORT = 5002;
-const HOST = "192.168.1.100"; // Replace with your machine's local IP address
-app.listen(PORT, HOST, () => {
-  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
 
 // Export the express app to Firebase Functions
